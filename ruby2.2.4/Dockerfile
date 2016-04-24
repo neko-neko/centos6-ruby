@@ -21,6 +21,8 @@ RUN yum -y update && yum -y install \
     sqlite-devel \
     zlib \
     zlib-devel \
+    libxslt \
+    libxslt-devel \
     wget \
     && yum clean all
 
@@ -30,7 +32,8 @@ RUN tar -xzvf ruby-$RUBY_VERSION.tar.gz
 WORKDIR ruby-$RUBY_VERSION
 RUN ./configure && make && make install
 WORKDIR /
-RUN rm -rf ruby-$RUBY_VERSION
 
 # Bundler install
 RUN gem install bundler --no-document
+
+CMD ["/bin/bash"]
